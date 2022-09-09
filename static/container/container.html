@@ -14,6 +14,10 @@
         --bg-col:rgb(0, 0, 0);
       }
 
+      html{
+        overflow: hidden;
+      }
+
       body {
         margin: 0;
         padding:0;
@@ -31,6 +35,8 @@
         box-sizing: border-box;
         color: orange;
         font-family: 'Fredoka One', cursive;
+        overflow: hidden;
+        
       }
       h2 {
         line-height: 1;
@@ -179,7 +185,19 @@
       <p>totocalcio-online-container</p>
     </footer>
     <script>
-      const URL_PAGINA = "http://localhost:8000/react7/index.html";
+      const URL_PAGINA = "http://localhost:8000/react12/index.html";
+      const ret = {
+            bearerToken: "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4czd6bkZDZnByWENhUjRMWG5PajdxV2k2bnNNeGE0NTcwUFkweEZZd21vIn0.eyJleHAiOjE5NzczODEwNzUsImlhdCI6MTY2MjAyMTA3NSwianRpIjoiYjI4YjEzYzUtYTU1Zi00YmFkLWFjMWItMDc2YzFiZmU4NGM1IiwiaXNzIjoiaHR0cDovL2Rldi10dGMtb2F1dGgubWljcm9nYW1lLml0OjgwODAvcmVhbG1zL1RvdG9jYWxjaW9PbkxpbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNDVkMjgzZTMtMjhiZS00NmU0LTljZDUtZjI2ZWY2OWU0MjZkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiRnJvbnRFbmRBcGlPbkxpbmUiLCJzZXNzaW9uX3N0YXRlIjoiZjdhZjk2OTQtNjYyNS00MjUxLTllYmItYzMxNzYzMzM1YjU3IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy10b3RvY2FsY2lvb25saW5lIiwicm9sZUZyb250RW5kQXBpT25MaW5lIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsInNpZCI6ImY3YWY5Njk0LTY2MjUtNDI1MS05ZWJiLWMzMTc2MzMzNWI1NyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlBpYW5ldGEgUGlhbmV0YSIsInByZWZlcnJlZF91c2VybmFtZSI6InBpYW5ldGEiLCJnaXZlbl9uYW1lIjoiUGlhbmV0YSIsImZhbWlseV9uYW1lIjoiUGlhbmV0YSJ9.jQk9NViHjaVMQM7pTL7zKTkCKQLgeHo_y-PXGysJf7FQ9DDCtWJIrN_wQ1VFLoOmeBcJy1j8pqNfU2AHb6GD5PjZ1F9AQUBLGNl1y21XhRI7DPu4dGqp9lnS2xk9sgtD1lXYPk9y2EOwVVZbS8ugNJzQ4LULLNHhIPfur7ce8zrYxHZBlSszQyUUH0sQtPB6PuXxDD0HUmu19DbHVn5B3SMYU_hjb8L5E_2MsIwqBgTLnLukq0SRRmvlJLUmKWX0pd3xZmJFlmoFhRTEk95LKxAtR-al9NDUTsXyVqMnU1LYuSl1bHa4ZJ-YjoaHmIf2ieZUFv-dC2peWr235mUDvg",
+            brandColor: "blue",
+            cn: "cn-12345",
+            ipAddress: "127.0.0.1",
+            mgToken: "",
+            site: "BETSENSE",
+          };
+      
+      
+
+
       const btn_openIframe = document.getElementById("apri");
       
     
@@ -190,21 +208,41 @@
       });
 
       window.addEventListener("message", (event) => {
+
+        if(event.data)
+
         console.log("è ARRIVATO UN MESSAGE!!");
-        console.log(event.data);
+        console.log({message:event.data})
+        if(!(typeof event.data ==="object")){
+          return
+        }
+        
+        if(!event.data.hasOwnProperty('func')){
+         return 
+        }
+
+        let func = event.data['func'];
+        if(func!=='totocalcioLogin'){
+          return
+        }
+        ret.mgToken="mg-token--riconfigurato-dalla-chiamata-di-totocalcioLogin";
+        setTimeout(()=>window.open(URL_PAGINA, "totocalcioclient"))
+        
+        
+        
       });
 
       window.containerTotocalcioConfiguration =
         function containerTotocalcioConfiguration() {
-          let ret = {
-            bearerToken: "il token---1",
-            brandColor: "#ff7b03",
-            cn: "cn-12345",
-            ipAddress: "127.0.0.1",
-            mgToken: "mg-token-matt",
-            site: "BETSENSE",
-          };
-
+          // let ret = {
+          //   bearerToken: "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4czd6bkZDZnByWENhUjRMWG5PajdxV2k2bnNNeGE0NTcwUFkweEZZd21vIn0.eyJleHAiOjE5NzczODEwNzUsImlhdCI6MTY2MjAyMTA3NSwianRpIjoiYjI4YjEzYzUtYTU1Zi00YmFkLWFjMWItMDc2YzFiZmU4NGM1IiwiaXNzIjoiaHR0cDovL2Rldi10dGMtb2F1dGgubWljcm9nYW1lLml0OjgwODAvcmVhbG1zL1RvdG9jYWxjaW9PbkxpbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNDVkMjgzZTMtMjhiZS00NmU0LTljZDUtZjI2ZWY2OWU0MjZkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiRnJvbnRFbmRBcGlPbkxpbmUiLCJzZXNzaW9uX3N0YXRlIjoiZjdhZjk2OTQtNjYyNS00MjUxLTllYmItYzMxNzYzMzM1YjU3IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy10b3RvY2FsY2lvb25saW5lIiwicm9sZUZyb250RW5kQXBpT25MaW5lIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsInNpZCI6ImY3YWY5Njk0LTY2MjUtNDI1MS05ZWJiLWMzMTc2MzMzNWI1NyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlBpYW5ldGEgUGlhbmV0YSIsInByZWZlcnJlZF91c2VybmFtZSI6InBpYW5ldGEiLCJnaXZlbl9uYW1lIjoiUGlhbmV0YSIsImZhbWlseV9uYW1lIjoiUGlhbmV0YSJ9.jQk9NViHjaVMQM7pTL7zKTkCKQLgeHo_y-PXGysJf7FQ9DDCtWJIrN_wQ1VFLoOmeBcJy1j8pqNfU2AHb6GD5PjZ1F9AQUBLGNl1y21XhRI7DPu4dGqp9lnS2xk9sgtD1lXYPk9y2EOwVVZbS8ugNJzQ4LULLNHhIPfur7ce8zrYxHZBlSszQyUUH0sQtPB6PuXxDD0HUmu19DbHVn5B3SMYU_hjb8L5E_2MsIwqBgTLnLukq0SRRmvlJLUmKWX0pd3xZmJFlmoFhRTEk95LKxAtR-al9NDUTsXyVqMnU1LYuSl1bHa4ZJ-YjoaHmIf2ieZUFv-dC2peWr235mUDvg",
+          //   brandColor: "#ff7b03",
+          //   cn: "cn-12345",
+          //   ipAddress: "127.0.0.1",
+          //   mgToken: "mg-token-matt",
+          //   site: "BETSENSE",
+          // };
+    
           return ret;
         };
     </script>

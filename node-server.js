@@ -1,7 +1,6 @@
 import http from "http";
 import fs from "fs";
 import path from "path";
-import superagent from 'superagent';
 const mimeTypes = {
   ".html": "text/html",
   ".js": "text/javascript",

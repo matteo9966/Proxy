@@ -3,5 +3,8 @@
     "dependencies": {
         "http-proxy": "^1.18.1",
         "superagent": "^8.0.0"
+    },
+    "scripts": {
+        "start":"node node-server.js"
     }
 }
